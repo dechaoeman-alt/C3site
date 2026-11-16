@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C3 | CLOUD CLOVER CO.</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #050b16;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, #087caa35, transparent 45%),
+    radial-gradient(ellipse at 80% 70%, #0055ff25, transparent 45%);
+  animation: glow 8s infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes glow {
+  from { opacity: .5; }
+  to { opacity: 1; }
+}
+
+header {
+  padding: 20px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #071323dd;
+  border-bottom: 1px solid #00cfff55;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(15px);
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 900;
+  color: #00d9ff;
+  letter-spacing: 2px;
+}
+
+nav {
+  display: flex;
+  gap: 22px;
+}
+
+nav a {
+  color: #dceeff;
+  text-decoration: none;
+  font-size: 13px;
+  transition: .3s;
+}
+
+nav a:hover {
+  color: #00d9ff;
+}
+
+.hero {
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.hero small {
+  color: #00d9ff;
+  letter-spacing: 5px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(35px, 7vw, 75px);
+  line-height: 1.15;
+  text-shadow: 0 0 25px #00cfff88;
+}
+
+.hero h1 span {
+  color: #00d9ff;
+}
+
+.hero p {
+  color: #a9c5dc;
+  margin: 22px 0 30px;
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 8px;
+  background: #00cfff;
+  color: #00121d;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 20px #00cfff77;
+  transition: .3s;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px #00cfff;
+}
+
+section {
+  padding: 75px 7%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.section-title span {
+  color: #00d9ff;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: linear-gradient(145deg, #10243a, #07111f);
+  padding: 30px;
+  border: 1px solid #00cfff44;
+  border-radius: 16px;
+  box-shadow: 0 0 20px #008cff12;
+  transition: .3s;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+  border-color: #00d9ff;
+  box-shadow: 0 0 25px #00cfff33;
+}
+
+.card h3 {
+  color: #00d9ff;
+  margin-bottom: 15px;
+}
+
+.card p {
+  color: #a9c5dc;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 18px;
+  color: #00e6a0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.community {
+  text-align: center;
+  background: #071727aa;
+  border-top: 1px solid #00cfff33;
+  border-bottom: 1px solid #00cfff33;
+}
+
+.community p {
+  color: #a9c5dc;
+  margin: 15px 0 25px;
+}
+
+footer {
+  padding: 30px 15px;
+  text-align: center;
+  color: #829db4;
+  font-size: 13px;
+}
+
+footer span {
+  color: #00d9ff;
+}
+
+@media(max-width: 700px) {
+  header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  nav a {
+    font-size: 12px;
+  }
+
+  .hero {
+    min-height: 530px;
+  }
+
+  section {
+    padding: 55px 6%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">C3</div>
+
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#tournaments">TOURNAMENTS</a>
+    <a href="#teams">TEAMS</a>
+    <a href="#players">PLAYERS</a>
+    <a href="#community">COMMUNITY</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <small>WELCOME</small>
+
+  <h1>
+    TO CLOUD<br>
+    <span>CLOVER CO.</span><br>
+    (C3)
+  </h1>
+
+  <p>
+    Enter the world of competitive gaming.
+    Compete, connect and rise together.
+    Your journey to greatness starts here.
+  </p>
+
+  <a href="#tournaments" class="btn">
+    EXPLORE TOURNAMENTS
+  </a>
+</section>
+
+<section id="tournaments">
+  <h2 class="section-title">
+    UPCOMING <span>TOURNAMENTS</span>
+  </h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>PROJECT MEGA S2</h3>
+      <p>Game: Mobile Legends Bang Bang (MLBB)</p>
+      <p>Start Date: TBA</p>
+      <p>Registration: TBA</p>
+      <p>Prize Pool: TBA</p>
+      <span class="status">● UPCOMING</span>
+    </div>
+
+    <div class="card">
+      <h3>MORE TOURNAMENTS</h3>
+      <p>New competitions and exciting events are coming soon.</p>
+      <span class="status">● COMING SOON</span>
+    </div>
+
+  </div>
+</section>
+
+<section id="teams">
+  <h2 class="section-title">
+    OUR <span>TEAMS</span>
+  </h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>TEAM PROFILES</h3>
+      <p>Discover competitive teams representing C3.</p>
+    </div>
+
+    <div class="card">
+      <h3>TEAM RANKINGS</h3>
+      <p>Track team performance and achievements.</p>
+    </div>
+  </div>
+</section>
+
+<section id="players">
+  <h2 class="section-title">
+    OUR <span>PLAYERS</span>
+  </h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>PLAYER PROFILES</h3>
+      <p>Meet the players and discover their gaming journeys.</p>
+    </div>
+
+    <div class="card">
+      <h3>LEADERBOARD</h3>
+      <p>Player rankings and competitive statistics coming soon.</p>
+    </div>
+  </div>
+</section>
+
+<section class="community" id="community">
+  <h2 class="section-title">
+    JOIN THE <span>COMMUNITY</span>
+  </h2>
+
+  <p>
+    Be part of Cloud Clover Co. (C3).
+    Connect with gamers and compete together.
+  </p>
+
+  <a href="#" class="btn">COMING SOON</a>
+</section>
+
+</main>
+
+<footer>
+  © 2026 <span>CLOUD CLOVER CO. (C3)</span>
+  <br><br>
+  Built for gamers. Powered by passion.
+</footer>
+
+</body>
+  </html>
+  
