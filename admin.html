@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C3 | Admin Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #070d1b;
+  --panel: #101a2e;
+  --panel2: #14213a;
+  --blue: #278bff;
+  --cyan: #39d8ff;
+  --purple: #8065ff;
+  --text: #edf4ff;
+  --muted: #91a4c2;
+  --border: rgba(120,160,220,.16);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+}
+
+button, input { font: inherit; }
+
+button { cursor: pointer; }
+
+.login-screen {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background:
+    radial-gradient(ellipse at 20% 20%, #173b72 0%, transparent 45%),
+    radial-gradient(ellipse at 80% 80%, #29205e 0%, transparent 45%),
+    var(--bg);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 410px;
+  padding: 35px;
+  background: rgba(16,26,46,.94);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  text-align: center;
+}
+
+.logo {
+  font: 800 38px 'Orbitron', sans-serif;
+  color: var(--cyan);
+  letter-spacing: 5px;
+}
+
+.login-card h2 {
+  font: 700 20px 'Orbitron', sans-serif;
+  margin-top: 25px;
+}
+
+.login-card p { color: var(--muted); }
+
+.login-card input {
+  width: 100%;
+  padding: 14px;
+  margin: 9px 0;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #091326;
+  color: white;
+}
+
+.primary-btn {
+  border: 0;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: linear-gradient(100deg,var(--blue),var(--purple));
+  color: white;
+  font-weight: 700;
+}
+
+.login-card .primary-btn { width: 100%; margin-top: 15px; }
+
+#loginMessage {
+  color: #ff8d9a;
+  font-size: 14px;
+}
+
+.dashboard { display: none; }
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 245px;
+  padding: 25px 15px;
+  background: #0b1427;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+
+.sidebar .logo { font-size: 27px; }
+
+.sidebar small {
+  display: block;
+  color: var(--muted);
+  margin: 7px 0 30px;
+}
+
+.nav-btn {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  margin: 5px 0;
+  text-align: left;
+  color: #aebed8;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  font-size: 17px;
+}
+
+.nav-btn:hover, .nav-btn.active {
+  background: #172b4c;
+  color: var(--cyan);
+}
+
+.main {
+  margin-left: 245px;
+  padding: 30px;
+  max-width: 1500px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+h1, h2, h3 {
+  font-family: 'Orbitron', sans-serif;
+}
+
+h1 { font-size: 23px; }
+
+.muted { color: var(--muted); }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 15px;
+  margin: 20px 0 30px;
+}
+
+.card, .content-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 20px;
+}
+
+.card span {
+  display: block;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.card strong {
+  display: block;
+  margin-top: 10px;
+  font: 700 28px 'Orbitron', sans-serif;
+  color: var(--cyan);
+}
+
+.section { display: none; }
+.section.active { display: block; }
+
+.content-panel { margin-bottom: 20px; }
+
+.content-panel h2 {
+  font-size: 17px;
+  margin-top: 0;
+}
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 550px;
+}
+
+th, td {
+  padding: 13px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th { color: var(--cyan); }
+
+.status {
+  color: #ffc66d;
+  background: #3c2d18;
+  border-radius: 20px;
+  padding: 4px 10px;
+}
+
+.action-btn {
+  border: 0;
+  border-radius: 6px;
+  padding: 7px 11px;
+  color: white;
+  background: #246fcb;
+  margin: 2px;
+}
+
+.reject { background: #a83c50; }
+
+.notice {
+  padding: 15px;
+  border: 1px solid #735b28;
+  background: #302719;
+  border-radius: 9px;
+  color: #f7d99b;
+  margin-bottom: 20px;
+}
+
+.logout { background: #9c3d52; }
+
+@media(max-width:950px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar nav {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+  .main { margin-left: 0; padding: 20px; }
+  .cards { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+
+@media(max-width:480px) {
+  .cards { grid-template-columns: 1fr 1fr; }
+  .main { padding: 14px; }
+  .login-card { padding: 25px 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="logo">C3</div>
+    <h2>ADMIN LOGIN</h2>
+    <p>CLOUD CLOVER CO. Management Portal</p>
+
+    <form id="loginForm">
+      <input type="email" id="adminEmail" placeholder="Admin email" required>
+      <input type="password" id="adminPassword" placeholder="Password" required>
+      <button class="primary-btn" type="submit">SIGN IN</button>
+    </form>
+
+    <p id="loginMessage">
+      Authentication setup is required before login can be enabled.
+    </p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+
+  <aside class="sidebar">
+    <div class="logo">C3</div>
+    <small>CLOUD CLOVER CO. ADMIN</small>
+
+    <nav id="navigation">
+      <button class="nav-btn active" data-section="overview">⌂ Overview</button>
+      <button class="nav-btn" data-section="registrations">♙ Registrations</button>
+      <button class="nav-btn" data-section="tournaments">🏆 Tournaments</button>
+      <button class="nav-btn" data-section="matches">⚔ Matches & Fixtures</button>
+      <button class="nav-btn" data-section="teams">♧ Teams</button>
+      <button class="nav-btn" data-section="players">♙ Players</button>
+      <button class="nav-btn" data-section="streamers">◉ Streamers</button>
+      <button class="nav-btn" data-section="news">▤ Latest News</button>
+      <button class="nav-btn" data-section="announcements">◈ Announcements</button>
+      <button class="nav-btn" data-section="journey">✦ Join the Journey</button>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1 id="pageTitle">ADMIN OVERVIEW</h1>
+        <div class="muted">Manage your C3 esports community</div>
+      </div>
+      <button class="primary-btn logout" id="logoutBtn">LOG OUT</button>
+    </div>
+
+    <div class="notice">
+      DEMO DASHBOARD — No live database is connected yet.
+      Changes made here will not be saved.
+    </div>
+
+    <section class="section active" id="overview">
+      <div class="cards">
+        <div class="card"><span>Pending Registrations</span><strong>—</strong></div>
+        <div class="card"><span>Total Tournaments</span><strong>—</strong></div>
+        <div class="card"><span>Total Teams</span><strong>—</strong></div>
+        <div class="card"><span>Total Players</span><strong>—</strong></div>
+      </div>
+
+      <div class="content-panel">
+        <h2>WELCOME TO C3 ADMIN</h2>
+        <p class="muted">
+          Your central control panel for tournaments, matches,
+          teams, players, streamers and community updates.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="registrations">
+      <div class="content-panel">
+        <h2>REGISTRATION APPROVALS</h2>
+        <p class="muted">Review team, player and streamer submissions here.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Username</th><th>Type</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody><tr><td colspan="4" class="muted">No live registrations connected.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tournaments">
+      <div class="content-panel">
+        <h2>TOURNAMENT MANAGEMENT</h2>
+        <p class="muted">Manage tournament names, games, dates, deadlines, prize pools and registration status.</p>
+        <p>No Google Sheets connection yet.</p>
+      </div>
+    </section>
+
+    <section class="section" id="matches">
+      <div class="content-panel">
+        <h2>MATCHES & FIXTURES</h2>
+        <p class="muted">Manage fixtures, match times, scores and results.</p>
+        <p>No Google Sheets connection yet.</p>
+      </div>
+    </section>
+
+    <section class="section" id="teams">
+      <div class="content-panel">
+        <h2>TEAM MANAGEMENT</h2>
+        <p class="muted">Review, approve and manage C3 teams.</p>
+        <p>No live team records connected.</p>
+      </div>
+    </section>
+
+    <section class="section" id="players">
+      <div class="content-panel">
+        <h2>PLAYER MANAGEMENT</h2>
+        <p class="muted">Manage player usernames and public profiles.</p>
+        <p>No live player records connected.</p>
+      </div>
+    </section>
+
+    <section class="section" id="streamers">
+      <div class="content-panel">
+        <h2>STREAMER MANAGEMENT</h2>
+        <p class="muted">Manage streamer profiles and channel links.</p>
+        <p>No live streamer records connected.</p>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="content-panel">
+        <h2>LATEST NEWS</h2>
+        <p class="muted">Publish and manage C3 news articles.</p>
+        <p>No Google Sheets connection yet.</p>
+      </div>
+    </section>
+
+    <section class="section" id="announcements">
+      <div class="content-panel">
+        <h2>ANNOUNCEMENTS</h2>
+        <p class="muted">Manage tournament announcements and community notices.</p>
+        <p>No Google Sheets connection yet.</p>
+      </div>
+    </section>
+
+    <section class="section" id="journey">
+      <div class="content-panel">
+        <h2>JOIN THE JOURNEY</h2>
+        <p class="muted">Manage the content and links in your Join the Journey section.</p>
+        <p>No Google Sheets connection yet.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+const navButtons = document.querySelectorAll('.nav-btn');
+
+navButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    navButtons.forEach(item => item.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(section => {
+      section.classList.remove('active');
+    });
+
+    button.classList.add('active');
+
+    const section = document.getElementById(button.dataset.section);
+    if (section) section.classList.add('active');
+
+    document.getElementById('pageTitle').textContent =
+      button.textContent.trim().replace(/^[^\w]+/, '').toUpperCase();
+  });
+});
+
+// Login intentionally disabled until secure authentication is configured.
+document.getElementById('loginForm').addEventListener('submit', event => {
+  event.preventDefault();
+  document.getElementById('loginMessage').textContent =
+    'Login is not enabled yet. Supabase authentication and admin permissions must be configured first.';
+});
+
+// Demo logout returns to the login screen.
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+});
+</script>
+
+</body>
+      </html>
+      
